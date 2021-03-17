@@ -40,6 +40,18 @@ public class MainActivity extends AppCompatActivity {
         mMessageEditText = (EditText) findViewById(R.id.editText_main);
         mReplyHeadTextView = (TextView) findViewById(R.id.text_header_reply);
         mReplyTextView = (TextView) findViewById(R.id.text_message_reply);
+
+        //Restore the states
+        if (savedInstanceState != null) {
+            boolean isVisible =
+                    savedInstanceState.getBoolean("reply_visible");
+            if (isVisible) {
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+                mReplyTextView.setText(savedInstanceState.getString("reply_text"));
+                mReplyTextView.setVisibility(View.VISIBLE);
+
+            }
+        }
     }
 
 
@@ -121,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mReplyHeadTextView.getVisibility() == View.VISIBLE) {
+            outState.putBoolean("reply_visible", true);
+            outState.putString("reply_text",mReplyTextView.getText().toString());
+        }
     }
 
 }
