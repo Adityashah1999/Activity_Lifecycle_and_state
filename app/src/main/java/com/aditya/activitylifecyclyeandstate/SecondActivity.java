@@ -2,98 +2,64 @@ package com.aditya.activitylifecyclyeandstate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
-    // Unique tag for the intent reply.
-    public static final String EXTRA_REPLY =
-            "com.aditya.activitylifecycleandstate.extra.REPLY";
-    private static final String LOG_TAG = SecondActivity.class.getSimpleName();
+    public static final String EXTRA_ITEMS = "com.adityalifecyclyeandstate.extra.ITEMS";
 
-    // EditText for the reply.
-    private EditText mReply;
-
-    /**
-     * Initializes the activity.
-     *
-     * @param savedInstanceState The current state data
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+       Intent intent = getIntent();
+    }
 
-        // Initialize view variables.
-        mReply = (EditText) findViewById(R.id.editText_second);
+    @SuppressLint("NonConstantResourceId")
+    public void selectItem(View view) {
+        Intent return_items_intent = new Intent();
 
-        // Get the intent that launched this activity, and the message in
-        // the intent extra.
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        // Put that message into the text_message TextView
-        TextView textView = (TextView) findViewById(R.id.text_message);
-        if (textView != null) {
-            textView.setText(message);
+        switch (view.getId()){
+            case R.id.button_Chocolate:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Chocolate"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_oil:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Oil"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_milk:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Milk"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_eggs:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Eggs"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_cheese:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Cheese"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_rice:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Rice"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_wheat:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Wheat Flour"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_bread:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Bread"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_sugar:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Sugar"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            case R.id.button_salt:
+                return_items_intent.putExtra(EXTRA_ITEMS, "Salt"); setResult(RESULT_OK, return_items_intent); finish();
+                break;
+            default:
+                Toast.makeText(SecondActivity.this, "There was an error", Toast.LENGTH_LONG).show();
+                break;
         }
-    }
 
-    /**
-     * Handle the onClick for the "Reply" button. Gets the message from the second EditText,
-     * creates an intent, and returns that message back to the main activity.
-     *
-     * @param view The view (Button) that was clicked.
-     */
-    public void returnReply(View view) {
-        // Get the reply message from the edit text.
-        String reply = mReply.getText().toString();
-
-        // Create a new intent for the reply, add the reply message to it as an extra,
-        // set the intent result, and close the activity.
-        Intent replyIntent = new Intent();
-        replyIntent.putExtra(EXTRA_REPLY, reply);
-        setResult(RESULT_OK, replyIntent);
-        Log.d(LOG_TAG, "End SecondActivity");
-        finish();
-    }
-    @Override
-    public void onStart(){
-        super.onStart();
-        Log.d(LOG_TAG, "onStart");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(LOG_TAG, "onPause");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(LOG_TAG, "onRestart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(LOG_TAG, "onResume");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(LOG_TAG, "onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(LOG_TAG, "onDestroy");
     }
 }
