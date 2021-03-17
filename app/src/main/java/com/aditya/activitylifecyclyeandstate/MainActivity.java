@@ -1,5 +1,6 @@
 package com.aditya.activitylifecyclyeandstate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState( Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("count_value", countTextView.getText().toString());
     }
